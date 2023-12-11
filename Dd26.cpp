@@ -3,98 +3,84 @@
 using namespace std;
 int top;
 char str[20];
-
-void push(char x)
-{
+void push(char x){
     top++;
     str[top]=x;
 }
 
-void pop()
-{
+void pop(){
     top--;
 }
 
-void input(){
+void inp(){
     char ch[20];
-    int i=0,flag=0;
     top=-1;
-    cout<<"\nEnter the expression: ";
+    int i=0,flag=0;
+    cout<<"Enter expression: ";
     cin>>ch;
-    while(i<strlen(ch))
-    {
-        if((ch[i]=='(')||(ch[i]=='{')||(ch[i]=='['))
-        {
+    while(i<strlen(ch)){
+        if((ch[i]=='(')||(ch[i]=='[')||(ch[i]=='{')){
             push(ch[i]);
         }
-
-        if(ch[i]==')')
-        {
-            if(str[top]=='(')
+        if(ch[i]==')'){
+            if(str[top]=='('){
                 pop();
+            }
             else{
-                cout<<"'(' is absent"<<endl;
+                cout<<"'(' is absent";
                 flag=1;
                 break;
             }
         }
 
-        if(ch[i]=='}')
-        {
-            if(str[top]=='{')
-            {
+        if(ch[i]==']'){
+            if(str[top]=='['){
                 pop();
             }
             else{
-                cout<<"'{' is absent"<<endl;
+                cout<<"'[' is absent";
                 flag=1;
                 break;
             }
         }
 
-        if(ch[i]==']')
-        {
-            if(str[top]=='[')
-            {
+        if(ch[i]=='}'){
+            if(str[top]=='{'){
                 pop();
             }
             else{
-                cout<<"'[' is absent"<<endl;
+                cout<<"'{' is absent";
                 flag=1;
                 break;
             }
         }
-     i++;
+        i++;
     }
-    if((str[top]==-1) && (flag=0))
-    {
-        cout<<"\nSTACK EMPTY!!\nEXPRESSION BALANCED"<<endl;
+    if((str[top]==-1) && (flag==0)){
+        cout<<"\nEmpty\nWELL BALANCED EXP";
     }
     else{
-        cout<<"NOT WELL PARENTHESIZED"<<endl;
-        while(str[top]!=-1)
-        {
-            if(str[top]=='{')
-            {
+        cout<<"NOT WELL PARENRTHESIZED";
+        while(str[top]!=-1){
+            if(str[top]=='('){
                 pop();
-                cout<<"'}' is absent"<<endl;
+                cout<<"')' is absent";
             }
-            if(str[top]=='[')
-            {
+
+            if(str[top]=='['){
                 pop();
                 cout<<"']' is absent";
             }
-            if(str[top]=='(')
-            {
+
+            if(str[top]=='{'){
                 pop();
-                cout<<"')' is absent";
+                cout<<"'}' is absent";
             }
         }
     }
 }
 
-int main()
-{
-    input();
+int main(){
+    inp();
     return 0;
 }
